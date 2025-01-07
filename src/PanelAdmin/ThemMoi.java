@@ -1,0 +1,428 @@
+package PanelAdmin;
+
+import ConnectUI.*;
+import java.awt.*;
+import java.io.*;
+import java.sql.*;
+import java.text.SimpleDateFormat;
+import java.util.prefs.Preferences;
+import javax.sql.rowset.serial.SerialBlob;
+import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
+public class ThemMoi extends javax.swing.JFrame {
+
+    int xMouse, yMouse;
+    String q, ma;
+    ConnectDB cn = new ConnectDB();
+    Connection conn;
+    ResultSet rs;
+    byte[] anhSV;
+    
+    public ThemMoi() {
+        initComponents();
+    }
+    
+    Preferences pref;
+    boolean prefReme;
+    
+    public void loadmau(){
+        pref = Preferences.userNodeForPackage(this.getClass());
+        prefReme = pref.getBoolean("Color", Boolean.valueOf(""));
+        if (prefReme) {
+            txtImage.setForeground(new java.awt.Color(Integer.parseInt(pref.get("r", "")), Integer.parseInt(pref.get("g", "")), Integer.parseInt(pref.get("b", ""))));
+        }
+    }
+
+    public ThemMoi(String quyen, String lop) {
+        this.q = quyen;
+        this.ma = lop;
+        initComponents();
+        loadmau();
+        setBackground(new java.awt.Color(0, 0, 0, 0));
+        if(q.equals("SV"))
+            automasv();
+        else if(q.equals("GV"))
+            automagv();
+    }
+
+    public void automagv() {
+        String sql = "SELECT TOP 1 magv FROM dbo.giangvien where khoa = '"+ ma +"' ORDER BY magv DESC";
+        conn = cn.getConnection();
+        try {
+            PreparedStatement pst = conn.prepareStatement(sql);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                String rnno = rs.getString("magv");
+                int co = rnno.length();
+                String txt = rnno.substring(0, 4);
+                String num = rnno.substring(4, co);
+                int n = Integer.parseInt(num);
+                n++;
+                String snum= "";
+                if(n>=0 && n<10)
+                    snum = "0" + Integer.toString(n);
+                else if(n>=10 && n<100)
+                    snum = Integer.toString(n);
+                String ftxt = txt + snum;
+                txtMasv.setText(ftxt);
+                txtMasv.setEnabled(false);                
+                txtLop.setEnabled(false);
+                txtLop.setText(ma);
+                lblMa.setText("Mã Khoa");
+                lblmasv.setText("Mã Giảng Viên");
+            } else {
+            }
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
+    }
+    
+    public void automasv() {
+        String sql = "SELECT TOP 1 masv FROM dbo.sinhvien where malop = '"+ ma +"' ORDER BY masv DESC";
+        conn = cn.getConnection();
+        try {
+            PreparedStatement pst = conn.prepareStatement(sql);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                String rnno = rs.getString("masv");
+                int co = rnno.length();
+                String txt = rnno.substring(0, 2);
+                String num = rnno.substring(2, co);
+                int n = Integer.parseInt(num);
+                n++;
+                String snum = Integer.toString(n);
+                String ftxt = txt + snum;
+                txtMasv.setText(ftxt);
+                txtMasv.setEnabled(false);                
+                txtLop.setEnabled(false);
+                txtLop.setText(ma);
+            } else {
+            }
+        } catch (Exception e) {
+            System.out.println("SV: " + e.toString());
+        }
+    }
+    
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        panelBorder1 = new dashboardUI.swing.PanelBorder();
+        txtImage = new ConnectUI.CircleImage();
+        txtEmail = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        txtHoten = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        lblMa = new javax.swing.JLabel();
+        dtNgaySinh = new com.toedter.calendar.JDateChooser();
+        jLabel3 = new javax.swing.JLabel();
+        txtDiachi = new javax.swing.JTextField();
+        txtLop = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        txtSdt = new javax.swing.JTextField();
+        txtMasv = new javax.swing.JTextField();
+        lblmasv = new javax.swing.JLabel();
+        cbGT = new javax.swing.JComboBox<>();
+        btnChooseImage = new javax.swing.JButton();
+        btnCancel = new javax.swing.JButton();
+        btnAccept = new javax.swing.JButton();
+        btnClose = new javax.swing.JButton();
+        btnClose1 = new javax.swing.JButton();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(242, 246, 253));
+        setMinimumSize(new java.awt.Dimension(800, 600));
+        setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(800, 600));
+        setResizable(false);
+        addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                formMouseDragged(evt);
+            }
+        });
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                formMousePressed(evt);
+            }
+        });
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        panelBorder1.setMinimumSize(new java.awt.Dimension(740, 600));
+        panelBorder1.setPreferredSize(new java.awt.Dimension(800, 600));
+        panelBorder1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        txtImage.setBackground(new java.awt.Color(242, 246, 253));
+        txtImage.setForeground(new java.awt.Color(0, 153, 255));
+        txtImage.setBorderSize(3);
+        txtImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/addPicture.png"))); // NOI18N
+        panelBorder1.add(txtImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, 160, 160));
+
+        txtEmail.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        panelBorder1.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 390, 300, 40));
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel5.setText("Giới tính:");
+        panelBorder1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 440, -1, -1));
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel6.setText("Điện thoại:");
+        panelBorder1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 230, -1, -1));
+
+        txtHoten.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        panelBorder1.add(txtHoten, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 320, 300, 40));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel1.setText("Quê quán:");
+        panelBorder1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 300, -1, -1));
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel4.setText("Ngày Sinh");
+        panelBorder1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 370, -1, -1));
+
+        lblMa.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblMa.setText("Lớp:");
+        panelBorder1.add(lblMa, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 440, -1, -1));
+
+        dtNgaySinh.setBackground(new java.awt.Color(255, 255, 255));
+        dtNgaySinh.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        dtNgaySinh.setOpaque(false);
+        panelBorder1.add(dtNgaySinh, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 390, 300, 40));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel3.setText("Họ và tên");
+        panelBorder1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, -1, -1));
+
+        txtDiachi.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        panelBorder1.add(txtDiachi, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 320, 300, 40));
+
+        txtLop.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        panelBorder1.add(txtLop, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 460, 300, 40));
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel7.setText("Email:");
+        panelBorder1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 370, -1, -1));
+
+        txtSdt.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        panelBorder1.add(txtSdt, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 250, 300, 40));
+
+        txtMasv.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        panelBorder1.add(txtMasv, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 300, 40));
+
+        lblmasv.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblmasv.setText("Mã Sinh Viên");
+        panelBorder1.add(lblmasv, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, -1, -1));
+
+        cbGT.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cbGT.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nam", "Nữ", "Khác" }));
+        panelBorder1.add(cbGT, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 460, 300, 40));
+
+        btnChooseImage.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnChooseImage.setText("Chọn Ảnh");
+        btnChooseImage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChooseImageActionPerformed(evt);
+            }
+        });
+        panelBorder1.add(btnChooseImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 200, 100, 30));
+        btnChooseImage.getAccessibleContext().setAccessibleName("");
+
+        btnCancel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnCancel.setText("Làm Mới");
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
+        panelBorder1.add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 540, 120, 40));
+
+        btnAccept.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnAccept.setText("Xác Nhận");
+        btnAccept.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAcceptActionPerformed(evt);
+            }
+        });
+        panelBorder1.add(btnAccept, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 540, 120, 40));
+
+        btnClose.setBackground(new Color(0.0f,0.0f,0.0f,0.0f));
+        btnClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/close copy.png"))); // NOI18N
+        btnClose.setBorder(null);
+        btnClose.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/img/close1.png"))); // NOI18N
+        btnClose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCloseActionPerformed(evt);
+            }
+        });
+        panelBorder1.add(btnClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(711, -4, 32, 32));
+
+        btnClose1.setBackground(new Color(0.0f,0.0f,0.0f,0.0f));
+        btnClose1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/mini1_1.png"))); // NOI18N
+        btnClose1.setBorder(null);
+        btnClose1.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/img/mini1.png"))); // NOI18N
+        btnClose1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClose1ActionPerformed(evt);
+            }
+        });
+        panelBorder1.add(btnClose1, new org.netbeans.lib.awtextra.AbsoluteConstraints(679, -4, 32, 32));
+
+        getContentPane().add(panelBorder1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 740, 600));
+
+        pack();
+        setLocationRelativeTo(null);
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_btnCloseActionPerformed
+
+    private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
+        int x = evt.getXOnScreen();
+        int y = evt.getYOnScreen();
+        this.setLocation(x - xMouse, y - yMouse);
+    }//GEN-LAST:event_formMouseDragged
+
+    private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
+        xMouse = evt.getX();
+        yMouse = evt.getY();
+    }//GEN-LAST:event_formMousePressed
+
+    private void btnAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptActionPerformed
+        conn = cn.getConnection();
+        String sql_add = "";
+        if(q.equals("SV"))
+            sql_add = "Insert into sinhvien values(?,?,?,?,?,?,?,?,?)";
+        else if(q.equals("GV"))
+            sql_add = "Insert into giangvien values(?,?,?,?,?,?,?,?,?)";
+        try {
+            
+            PreparedStatement pst = conn.prepareStatement(sql_add);
+            pst.setString(1, txtMasv.getText());            
+            pst.setString(2, txtHoten.getText());
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            pst.setString(3, sdf.format(dtNgaySinh.getDate()));
+            pst.setString(4, cbGT.getSelectedItem().toString());
+            pst.setString(5, txtSdt.getText());
+            pst.setString(6, txtEmail.getText());
+            pst.setString(7, txtDiachi.getText());
+            pst.setString(8, txtLop.getText());
+            Blob hinh = new SerialBlob(anhSV);
+            pst.setBlob(9, hinh);
+            int ktra = pst.executeUpdate();
+            if(ktra>0){
+                JOptionPane.showMessageDialog(rootPane, "Thêm mới thành công!");
+                this.setVisible(false);
+            }
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
+    }//GEN-LAST:event_btnAcceptActionPerformed
+
+    private void btnChooseImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChooseImageActionPerformed
+        JFileChooser fileChooser = new JFileChooser();
+        FileNameExtensionFilter imageFilter = new FileNameExtensionFilter("Hình ảnh", "png", "jpg");
+        fileChooser.setFileFilter(imageFilter);
+        fileChooser.setMultiSelectionEnabled(false);
+        int x = fileChooser.showDialog(this, "Chọn file");
+        if (x == JFileChooser.APPROVE_OPTION) {
+            File f = fileChooser.getSelectedFile();
+            String filename = f.getAbsolutePath();
+            ImageIcon icon = new ImageIcon(filename);
+            Image img = icon.getImage();
+            txtImage.setIcon(new ImageIcon(img));
+            try {
+                anhSV = CircleImage.toByteArray(img, "jpg");
+            } catch (IOException ex) {
+                System.out.println(ex.toString());
+            }
+        }
+    }//GEN-LAST:event_btnChooseImageActionPerformed
+
+    private void btnClose1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClose1ActionPerformed
+        setState(JFrame.ICONIFIED);
+    }//GEN-LAST:event_btnClose1ActionPerformed
+
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        txtMasv.setText("");
+        txtHoten.setText("");
+        dtNgaySinh.setDate(null);
+        cbGT.setSelectedIndex(0);
+        txtSdt.setText("");
+        txtEmail.setText("");
+        txtDiachi.setText("");
+        txtLop.setText("");
+        txtImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/addPicture.png")));
+
+        if (q.equals("SV")) {
+            automasv();
+        } else if (q.equals("GV")) {
+            automagv();
+        }
+
+        txtMasv.setEnabled(true);
+        txtLop.setEnabled(true);
+
+        JOptionPane.showMessageDialog(this, "Đã làm mới thông tin.");
+    }//GEN-LAST:event_btnCancelActionPerformed
+
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(ThemMoi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(ThemMoi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(ThemMoi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(ThemMoi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new ThemMoi().setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAccept;
+    private javax.swing.JButton btnCancel;
+    private javax.swing.JButton btnChooseImage;
+    private javax.swing.JButton btnClose;
+    private javax.swing.JButton btnClose1;
+    private javax.swing.JComboBox<String> cbGT;
+    private com.toedter.calendar.JDateChooser dtNgaySinh;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel lblMa;
+    private javax.swing.JLabel lblmasv;
+    private dashboardUI.swing.PanelBorder panelBorder1;
+    private javax.swing.JTextField txtDiachi;
+    private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtHoten;
+    private ConnectUI.CircleImage txtImage;
+    private javax.swing.JTextField txtLop;
+    private javax.swing.JTextField txtMasv;
+    private javax.swing.JTextField txtSdt;
+    // End of variables declaration//GEN-END:variables
+}

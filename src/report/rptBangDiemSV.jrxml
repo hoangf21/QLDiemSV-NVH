@@ -1,0 +1,205 @@
+<!-- Created with Jaspersoft Studio version 7.0.1.final using JasperReports Library version 7.0.1-573496633c2b4074e32f433154b543003f7d2498  -->
+<jasperReport name="report name" language="java" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="75ae4920-98d4-4517-b5b5-8a690a6a41b3">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<parameter name="masv" class="java.lang.String">
+		<defaultValueExpression><![CDATA["HT2101"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="hocky" class="java.lang.String">
+		<defaultValueExpression><![CDATA["2019_2020_1"]]></defaultValueExpression>
+	</parameter>
+	<query language="sql"><![CDATA[SELECT
+     ketqua."masv" AS ketqua_masv,
+     ketqua."malop" AS ketqua_malop,
+     ketqua."mamh" AS ketqua_mamh,
+     ketqua."hocky" AS ketqua_hocky,
+     ketqua."chuyencan" AS ketqua_chuyencan,
+     ketqua."giuaky" AS ketqua_giuaky,
+     ketqua."cuoiky" AS ketqua_cuoiky,
+     ketqua."tongket" AS ketqua_tongket,
+     ketqua."danhgia" AS ketqua_danhgia,
+     ketqua."diemchu" AS ketqua_diemchu,
+     monhoc."mamh" AS monhoc_mamh,
+     monhoc."tenmh" AS monhoc_tenmh,
+     monhoc."sotin" AS monhoc_sotin,
+     monhoc."makhoa" AS monhoc_makhoa,
+     monhoc."makhoi" AS monhoc_makhoi,
+     sinhvien."masv" AS sinhvien_masv,
+     sinhvien."hoten" AS sinhvien_hoten,
+     sinhvien."ngaysinh" AS sinhvien_ngaysinh,
+     sinhvien."gioitinh" AS sinhvien_gioitinh,
+     sinhvien."sdt" AS sinhvien_sdt,
+     sinhvien."email" AS sinhvien_email,
+     sinhvien."diachi" AS sinhvien_diachi,
+     sinhvien."malop" AS sinhvien_malop,
+     sinhvien."anh" AS sinhvien_anh
+FROM
+     "dbo"."sinhvien" sinhvien INNER JOIN "dbo"."ketqua" ketqua ON sinhvien."masv" = ketqua."masv" INNER JOIN
+     "dbo"."monhoc" monhoc  ON monhoc."mamh" = ketqua."mamh"
+WHERE
+     sinhvien."masv" = $P{masv}
+ AND ketqua."hocky" = $P{hocky}]]></query>
+	<field name="ketqua_masv" class="java.lang.String"/>
+	<field name="ketqua_malop" class="java.lang.String"/>
+	<field name="ketqua_mamh" class="java.lang.String"/>
+	<field name="ketqua_hocky" class="java.lang.String"/>
+	<field name="ketqua_chuyencan" class="java.lang.Double"/>
+	<field name="ketqua_giuaky" class="java.lang.Double"/>
+	<field name="ketqua_cuoiky" class="java.lang.Double"/>
+	<field name="ketqua_tongket" class="java.lang.Double"/>
+	<field name="ketqua_danhgia" class="java.lang.String"/>
+	<field name="ketqua_diemchu" class="java.lang.String"/>
+	<field name="monhoc_mamh" class="java.lang.String"/>
+	<field name="monhoc_tenmh" class="java.lang.String"/>
+	<field name="monhoc_sotin" class="java.lang.Integer"/>
+	<field name="monhoc_makhoa" class="java.lang.String"/>
+	<field name="monhoc_makhoi" class="java.lang.String"/>
+	<field name="sinhvien_masv" class="java.lang.String"/>
+	<field name="sinhvien_hoten" class="java.lang.String"/>
+	<field name="sinhvien_ngaysinh" class="java.sql.Date"/>
+	<field name="sinhvien_gioitinh" class="java.lang.String"/>
+	<field name="sinhvien_sdt" class="java.lang.String"/>
+	<field name="sinhvien_email" class="java.lang.String"/>
+	<field name="sinhvien_diachi" class="java.lang.String"/>
+	<field name="sinhvien_malop" class="java.lang.String"/>
+	<field name="sinhvien_anh" class="java.lang.Object"/>
+	<background splitType="Stretch"/>
+	<title height="289" splitType="Stretch">
+		<element kind="image" uuid="d42442fd-cf78-4a64-9fcb-af8931cb16b4" x="18" y="0" width="130" height="130">
+			<expression><![CDATA["E:\\log_1.png"]]></expression>
+		</element>
+		<element kind="staticText" uuid="ae31b7e2-7052-4de1-9b91-d8fed4ceb96f" x="554" y="64" width="175" height="20" fontSize="12.0" underline="true" hTextAlign="Center">
+			<text><![CDATA[Độc Lập - Tự Do - Hạnh Phúc]]></text>
+		</element>
+		<element kind="staticText" uuid="739d512a-1e0a-4e2f-82f8-4b0c17b89133" x="519" y="43" width="244" height="21" fontName="Arial" fontSize="14.0" hTextAlign="Center">
+			<text><![CDATA[Cộng hòa xã hội chủ nghĩa Việt Nam]]></text>
+		</element>
+		<element kind="staticText" uuid="ba28e029-cb54-4f89-b457-ef75084b6c23" x="489" y="231" width="100" height="20" fontSize="14.0" vTextAlign="Middle">
+			<text><![CDATA[Lớp:]]></text>
+		</element>
+		<element kind="staticText" uuid="84e64c35-b805-4e55-aeac-b6610e158442" x="48" y="231" width="100" height="20" fontSize="14.0" vTextAlign="Middle">
+			<text><![CDATA[Giới Tính:]]></text>
+		</element>
+		<element kind="staticText" uuid="734ba82f-e165-495e-b267-307adcb16d13" x="489" y="211" width="100" height="20" fontSize="14.0" vTextAlign="Middle">
+			<text><![CDATA[Mã SV:]]></text>
+		</element>
+		<element kind="staticText" uuid="f3b09d2b-f4b6-4b7b-ad16-5552ae3d83ca" x="48" y="211" width="100" height="20" fontSize="14.0" vTextAlign="Middle">
+			<text><![CDATA[Họ Tên:]]></text>
+		</element>
+		<element kind="staticText" uuid="c81baaeb-b126-46dc-a7dc-acbe77eff256" x="305" y="147" width="214" height="42" fontName="Arial" fontSize="16.0" bold="true" italic="false" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[BẢNG KẾT QUẢ HỌC TẬP]]></text>
+		</element>
+		<element kind="staticText" uuid="ff6f666f-0400-40b6-ab0b-245caba848bd" x="489" y="251" width="100" height="20" fontSize="14.0" vTextAlign="Middle">
+			<text><![CDATA[Chuyên Ngành:]]></text>
+		</element>
+		<element kind="staticText" uuid="5a46d761-7932-4628-a728-edc33c62a552" x="48" y="251" width="100" height="20" fontSize="14.0" vTextAlign="Middle">
+			<text><![CDATA[Ngày Sinh:]]></text>
+		</element>
+		<element kind="textField" uuid="5adf3166-1776-423d-a0db-e149c7468b14" x="589" y="251" width="174" height="20" fontSize="14.0" bold="false" vTextAlign="Middle">
+			<expression><![CDATA[$F{ketqua_malop}]]></expression>
+		</element>
+		<element kind="textField" uuid="fb31a092-7150-4a77-9aea-0f19e703e18c" x="589" y="231" width="174" height="20" fontSize="14.0" bold="false" vTextAlign="Middle">
+			<expression><![CDATA[$F{ketqua_malop}]]></expression>
+		</element>
+		<element kind="textField" uuid="c46955a4-9ddf-440d-99be-c6142a93164d" x="148" y="211" width="174" height="20" fontSize="14.0" bold="false" vTextAlign="Middle">
+			<expression><![CDATA[$F{sinhvien_hoten}]]></expression>
+		</element>
+		<element kind="textField" uuid="79455259-78bd-423e-9044-8f62d69e832a" x="148" y="251" width="174" height="20" fontSize="14.0" pattern="dd/MM/yyyy" bold="false" vTextAlign="Middle">
+			<expression><![CDATA[$F{sinhvien_ngaysinh}]]></expression>
+		</element>
+		<element kind="textField" uuid="1c1d69c8-11d0-4cae-a3db-efe7ca8e9063" x="589" y="211" width="174" height="20" fontSize="14.0" bold="false" vTextAlign="Middle">
+			<expression><![CDATA[$F{ketqua_masv}]]></expression>
+		</element>
+		<element kind="textField" uuid="a0513bfe-4974-46a3-b448-37e976b8837d" x="148" y="231" width="174" height="20" fontSize="14.0" bold="false" vTextAlign="Middle">
+			<expression><![CDATA[$F{sinhvien_gioitinh}]]></expression>
+		</element>
+	</title>
+	<pageHeader splitType="Stretch"/>
+	<columnHeader height="38" splitType="Stretch">
+		<element kind="rectangle" uuid="b779b812-fde3-4ab7-97c1-2e0744da93a8" x="479" y="0" width="65" height="38"/>
+		<element kind="rectangle" uuid="4803590a-28a7-4244-9442-355e2846402b" x="339" y="0" width="68" height="38"/>
+		<element kind="rectangle" uuid="24687692-7174-45c5-9e90-126d2ea534d4" x="0" y="0" width="73" height="38"/>
+		<element kind="rectangle" uuid="4da9e947-bd7e-4dad-a2ca-f31a725efbec" x="544" y="0" width="62" height="38"/>
+		<element kind="rectangle" uuid="af59ecd7-f3b4-42ee-8a4f-f4dad6b300fd" x="407" y="0" width="72" height="38"/>
+		<element kind="rectangle" uuid="87e2c1ef-ab82-4b12-aad8-4ffcbe0bb08b" x="73" y="0" width="266" height="38"/>
+		<element kind="rectangle" uuid="0d156bf5-dee9-4386-a55d-17ca0f8e55c8" x="606" y="0" width="64" height="38"/>
+		<element kind="staticText" uuid="48b9cd0a-d7df-47ee-aa1c-5b73c7c04b1d" x="544" y="0" width="62" height="38" fontName="Arial" fontSize="14.0" bold="true" italic="false" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Cuối kỳ]]></text>
+		</element>
+		<element kind="staticText" uuid="1ae7f244-b06d-44c8-b2ed-6c817374f6fa" x="0" y="0" width="73" height="38" fontName="Arial" fontSize="14.0" bold="true" italic="false" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Mã MH]]></text>
+		</element>
+		<element kind="staticText" uuid="a4c170e5-0301-4872-964b-71896602551e" x="339" y="0" width="68" height="38" fontName="Arial" fontSize="14.0" bold="true" italic="false" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Số TC]]></text>
+		</element>
+		<element kind="staticText" uuid="a5c3d92a-165b-44b2-9de1-7a2475a6f034" x="73" y="0" width="266" height="38" fontName="Arial" fontSize="14.0" bold="true" italic="false" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Tên Môn Học]]></text>
+		</element>
+		<element kind="staticText" uuid="4a046fcd-fcfd-4142-bd14-e2b86da4ca3a" x="479" y="0" width="65" height="38" fontName="Arial" fontSize="14.0" bold="true" italic="false" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Giữa kỳ]]></text>
+		</element>
+		<element kind="staticText" uuid="9706e5e9-b964-49fd-9628-2d02f0e99391" x="407" y="0" width="72" height="38" fontName="Arial" fontSize="14.0" bold="true" italic="false" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Chuyên cần]]></text>
+		</element>
+		<element kind="staticText" uuid="71810a98-a2ba-4fad-ac6f-ec68762199a7" x="606" y="0" width="64" height="38" fontName="Arial" fontSize="14.0" bold="true" italic="false" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Tổng Kết]]></text>
+		</element>
+		<element kind="rectangle" uuid="8d9085bb-72f9-4789-a80c-979088fdeb1e" x="670" y="0" width="62" height="38"/>
+		<element kind="staticText" uuid="97ee450c-ed5a-4234-be76-4599b13651d2" x="670" y="0" width="62" height="38" fontName="Arial" fontSize="14.0" bold="true" italic="false" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Đánh giá]]></text>
+		</element>
+		<element kind="rectangle" uuid="b068e2cd-63e6-41c6-a685-2855bbfd620f" x="732" y="0" width="70" height="38"/>
+		<element kind="staticText" uuid="a02c6751-c428-4ed4-85e7-6913e67d1bcc" x="732" y="0" width="70" height="38" fontName="Arial" fontSize="14.0" bold="true" italic="false" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Điểm chữ]]></text>
+		</element>
+	</columnHeader>
+	<detail>
+		<band height="38" splitType="Stretch">
+			<element kind="rectangle" uuid="4b5cbb1c-40ca-4d1e-92f8-4b0f6b8a3399" x="606" y="0" width="64" height="38"/>
+			<element kind="rectangle" uuid="0f774926-3c7f-473a-bf99-06741649c1ba" x="479" y="0" width="65" height="38"/>
+			<element kind="rectangle" uuid="a86dc870-5911-43ce-8f3e-0efd6e75bbad" x="73" y="0" width="266" height="38"/>
+			<element kind="rectangle" uuid="fdf6d999-f70d-4fb0-8451-07c70ea204aa" x="732" y="0" width="70" height="38"/>
+			<element kind="rectangle" uuid="b90d0130-2bac-4fa3-bd31-d2370ddc91b6" x="339" y="0" width="68" height="38"/>
+			<element kind="rectangle" uuid="f7075b9a-ab10-4e92-8395-c61ef6f63452" x="407" y="0" width="72" height="38"/>
+			<element kind="rectangle" uuid="5d513390-619f-4c37-94ff-2d6252f71e26" x="544" y="0" width="62" height="38"/>
+			<element kind="rectangle" uuid="2459507a-fad2-4ffd-a383-eee12c57da00" x="0" y="0" width="73" height="38"/>
+			<element kind="textField" uuid="3c5a9db3-54e5-4b41-8d18-05724b38abf4" x="407" y="0" width="72" height="38" fontName="Arial" fontSize="14.0" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{ketqua_chuyencan}]]></expression>
+			</element>
+			<element kind="textField" uuid="e44bbbef-c265-4c88-89cf-c530c45ebe0a" x="80" y="0" width="259" height="38" fontName="Arial" fontSize="14.0" hTextAlign="Left" vTextAlign="Middle">
+				<expression><![CDATA[$F{monhoc_tenmh}]]></expression>
+			</element>
+			<element kind="textField" uuid="3d4d60ce-9e1d-4009-9f1d-eaf977e29083" x="339" y="0" width="68" height="38" fontName="Arial" fontSize="14.0" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{monhoc_sotin}]]></expression>
+			</element>
+			<element kind="textField" uuid="0d5a019b-4ce4-4cb1-8ae7-ba8232cb44ef" x="544" y="0" width="62" height="38" fontName="Arial" fontSize="14.0" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{ketqua_cuoiky}]]></expression>
+			</element>
+			<element kind="textField" uuid="b4e4915a-ba1f-4232-b259-647833e4f880" x="0" y="0" width="73" height="38" fontName="Arial" fontSize="14.0" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{ketqua_mamh}]]></expression>
+			</element>
+			<element kind="textField" uuid="fcb5fe08-8714-46ab-aac5-4e079a1d27e8" x="732" y="0" width="70" height="38" fontName="Arial" fontSize="14.0" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{ketqua_diemchu}]]></expression>
+			</element>
+			<element kind="textField" uuid="553ad484-99c7-4041-8114-4d66075b3f60" x="479" y="0" width="65" height="38" fontName="Arial" fontSize="14.0" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{ketqua_giuaky}]]></expression>
+			</element>
+			<element kind="rectangle" uuid="3d336082-6b59-4eb6-b487-2f09a4fad98e" x="670" y="0" width="62" height="38"/>
+			<element kind="textField" uuid="cb7b083a-0c18-4081-9339-3cf330bbcfee" x="606" y="0" width="64" height="38" fontName="Arial" fontSize="14.0" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{ketqua_tongket}]]></expression>
+			</element>
+			<element kind="textField" uuid="855aff70-b969-4001-a9d0-c66fa1fb2b94" x="670" y="0" width="62" height="38" fontName="Arial" fontSize="14.0" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{ketqua_danhgia}]]></expression>
+			</element>
+		</band>
+	</detail>
+	<columnFooter splitType="Stretch"/>
+	<pageFooter height="39" splitType="Stretch">
+		<element kind="textField" uuid="f11962b8-864c-484e-9b58-fb0ea586b4d2" x="339" y="19" width="100" height="20" fontSize="14.0" hTextAlign="Center" vTextAlign="Middle">
+			<expression><![CDATA[$V{PAGE_NUMBER}]]></expression>
+		</element>
+	</pageFooter>
+	<summary height="42" splitType="Stretch"/>
+</jasperReport>

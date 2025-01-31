@@ -399,8 +399,8 @@ public class ForgotPwd extends javax.swing.JFrame {
 
                         username = txtUid.getText();
                         String host = "smtp.gmail.com";
-                        String user = "viethoang7012@gmail.com";
-                        String pass = "diue dkfp gane tvrg";
+                        String user = "Your gmail";
+                        String pass = "Password";
                         String to = txtEmail.getText();
                         String subject = "Bạn đang gửi yêu cầu đặt lại mật khẩu";
                         String message = sbb.toString();
